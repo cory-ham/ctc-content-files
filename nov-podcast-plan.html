@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>November Podcast Recording Briefs — CTC</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#07090f;--surface:#0f1220;--card:#141826;--border:#1e2535;--teal:#039F9D;--teal-dim:rgba(3,159,157,0.12);--lime:#c5e63a;--white:#f5f8f8;--muted:rgba(245,248,248,0.45);--danger:#e55}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--white);-webkit-font-smoothing:antialiased;min-height:100vh;padding:40px 24px 80px}
+a{color:var(--teal);text-decoration:none}a:hover{text-decoration:underline}
+.page{max-width:1100px;margin:0 auto}
+
+/* Header */
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:40px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+.header-left h1{font-size:1.6rem;font-weight:800;letter-spacing:-0.01em}
+.header-left p{font-size:0.82rem;color:var(--muted);margin-top:4px}
+.badge{background:var(--teal-dim);color:var(--teal);border:1px solid rgba(3,159,157,0.3);border-radius:6px;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:4px 10px}
+
+/* Arch section */
+.arch-box{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px 24px;margin-bottom:36px}
+.arch-box h2{font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
+.arch-box p{font-size:0.9rem;line-height:1.7;color:rgba(245,248,248,0.7)}
+
+/* Internal reference table */
+.internal-box{background:#0d0a00;border:1px solid #3a2800;border-radius:10px;padding:20px 24px;margin-bottom:36px}
+.internal-box h2{font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#d4a020;margin-bottom:14px}
+.internal-table{width:100%;border-collapse:collapse;font-size:0.82rem}
+.internal-table th{text-align:left;padding:6px 12px;font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(245,248,248,0.35);border-bottom:1px solid #2a1f00}
+.internal-table td{padding:8px 12px;border-bottom:1px solid rgba(58,40,0,0.5);color:rgba(245,248,248,0.7)}
+.internal-table tr:last-child td{border-bottom:none}
+.internal-table td:first-child{color:var(--white);font-weight:500}
+.rev-num{font-variant-numeric:tabular-nums;color:#d4a020}
+
+/* Episode grid */
+.episodes-header{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.episodes-header h2{font-size:1rem;font-weight:700}
+.ep-count{background:var(--surface);border:1px solid var(--border);border-radius:20px;font-size:0.72rem;font-weight:600;color:var(--muted);padding:2px 10px}
+.episodes{display:grid;gap:16px}
+
+/* Episode card */
+.ep-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color 0.2s}
+.ep-card:hover{border-color:rgba(3,159,157,0.3)}
+.ep-header{display:flex;align-items:flex-start;gap:16px;padding:20px 24px;cursor:pointer}
+.ep-num{flex-shrink:0;width:36px;height:36px;background:var(--teal-dim);border:1px solid rgba(3,159,157,0.25);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:0.78rem;font-weight:700;color:var(--teal)}
+.ep-meta{flex:1;min-width:0}
+.ep-meta h3{font-size:1rem;font-weight:700;line-height:1.3;margin-bottom:4px}
+.ep-meta .ep-sub{font-size:0.8rem;color:var(--muted)}
+.ep-toggle{flex-shrink:0;color:var(--muted);font-size:0.7rem;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;padding-top:2px;transition:color 0.2s}
+.ep-card:hover .ep-toggle{color:var(--teal)}
+
+.ep-body{display:none;padding:0 24px 24px;border-top:1px solid var(--border)}
+.ep-body.open{display:block}
+.ep-body-inner{padding-top:20px;display:grid;gap:16px}
+
+.section-label{font-size:0.65rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--teal);margin-bottom:6px}
+.section-text{font-size:0.88rem;line-height:1.72;color:rgba(245,248,248,0.72)}
+
+.discovery{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px}
+.discovery h4{font-size:0.82rem;font-weight:600;margin-bottom:6px}
+.discovery p{font-size:0.82rem;line-height:1.65;color:rgba(245,248,248,0.65)}
+.discovery .ps-tag{display:inline-block;background:var(--teal-dim);color:var(--teal);border-radius:4px;font-size:0.68rem;font-weight:600;letter-spacing:0.06em;padding:2px 7px;margin-top:8px}
+
+.founder-box{background:#0d1508;border:1px solid #1e3010;border-radius:8px;padding:14px 16px}
+.founder-box .section-label{color:#7dc44a}
+.founder-box p{font-size:0.82rem;line-height:1.65;color:rgba(245,248,248,0.65)}
+
+/* Special EP8 */
+.ep-card.ep8 .ep-num{background:rgba(197,230,58,0.1);border-color:rgba(197,230,58,0.25);color:var(--lime)}
+
+/* Footer */
+.footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--border);font-size:0.75rem;color:rgba(245,248,248,0.25);text-align:center}
+
+@media(max-width:600px){
+  .ep-header{flex-wrap:wrap}
+  .internal-table{font-size:0.75rem}
+  .internal-table td,.internal-table th{padding:6px 8px}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="header-left">
+      <h1>November Podcast Recording Briefs</h1>
+      <p>eCommerce Playbook — 8 Episodes</p>
+    </div>
+    <span class="badge">Internal</span>
+  </div>
+
+  <div class="arch-box">
+    <h2>Architecture</h2>
+    <p>Highlight client wins from Q3 and break down the tactical actions CTC took to create the results. Those tactical actions map back to the Prophit System. Give founders and marketers a clear reason to trust us with their 2027 plan.</p>
+  </div>
+
+  <div class="internal-box">
+    <h2>⚠ Internal Only — Brand Reference</h2>
+    <table class="internal-table">
+      <thead>
+        <tr><th>Brand / Story</th><th>2025 Store Revenue</th><th>Prophit Engineer</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Muscle Nation (Activewear)</td><td class="rev-num">$51,972,544</td><td>Nick Vuich</td></tr>
+        <tr><td>Denver Modern (Furniture)</td><td class="rev-num">$17,462,504</td><td>Kailyn Lander</td></tr>
+        <tr><td>Geometry (Home Textiles)</td><td class="rev-num">$21,193,008</td><td>Lacie Geary</td></tr>
+        <tr><td>The Normal Brand (Apparel)</td><td class="rev-num">$19,728,254</td><td>Lacie Geary</td></tr>
+        <tr><td>Highland Style (Hair Care)</td><td class="rev-num">$6,096,432</td><td>Anmar Abdul Jawad</td></tr>
+        <tr><td>Superfeet Worldwide (Footwear)</td><td class="rev-num">$6,474,283</td><td>Nick Vuich</td></tr>
+        <tr><td>WOLFpak (Accessories)</td><td class="rev-num">$30,182,958</td><td>Jonathan Kalis</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episodes-header">
+    <h2>Episodes</h2>
+    <span class="ep-count">8 episodes</span>
+  </div>
+
+  <div class="episodes">
+
+    <!-- EP1 -->
+    <div class="ep-card" onclick="toggle(this)">
+      <div class="ep-header">
+        <div class="ep-num">01</div>
+        <div class="ep-meta">
+          <h3>A $52M Activewear + Supplement Brand</h3>
+          <div class="ep-sub">Modeled CM$ grew 256% on 93% tracked-store revenue growth — Q3 '25 vs Q3 '26</div>
+        </div>
+        <div class="ep-toggle">Expand ↓</div>
+      </div>
+      <div class="ep-body">
+        <div class="ep-body-inner">
+          <div>
+            <div class="section-label">Where the business started</div>
+            <div class="section-text">~$52M in tracked store revenue in 2025. Established marketing team, but wanted more consistent online profitability and less dependence on major sale periods.</div>
+          </div>
+          <div>
+            <div class="section-label">Two discoveries</div>
+            <div class="discovery">
+              <h4>1. Advertising targets could pass while acquisition economics missed</h4>
+              <p><strong>Found:</strong> Channels could beat ROAS targets while new-customer revenue fell short.<br><br><strong>Did:</strong> Compared six Meta attribution windows against aMER and recommended a 3.4x seven-day-click ROAS floor.</p>
+              <span class="ps-tag">PS: Channel efficiency targets</span>
+            </div>
+            <div class="discovery" style="margin-top:10px">
+              <h4>2. Spending around promotions could erode contribution</h4>
+              <p><strong>Found:</strong> After a promotion, revenue remained above plan but spend outpaced it and acquisition efficiency missed target.<br><br><strong>Did:</strong> Pulled back low-return Meta spend. Called for further Google non-brand and TikTok reductions after the promotion.</p>
+              <span class="ps-tag">PS: Daily spending plans</span>
+            </div>
+          </div>
+          <div class="founder-box">
+            <div class="section-label">Why a founder should care</div>
+            <p>A 2027 plan can give the existing team shared forecasts, inventory-ready priorities and spending guardrails.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EP2 -->
+    <div class="ep-card" onclick="toggle(this)">
+      <div class="ep-header">
+        <div class="ep-num">02</div>
+        <div class="ep-meta">
+          <h3>A $17M Furniture Brand</h3>
+          <div class="ep-sub">DTC revenue grew 56%, modeled CM grew 119% — Q3 '25 vs Q3 '26</div>
+        </div>
+        <div class="ep-toggle">Expand ↓</div>
+      </div>
+      <div class="ep-body">
+        <div class="ep-body-inner">
+          <div>
+            <div class="section-label">Where the business started</div>
+            <div class="section-text">After rapid growth, founders reported sales down 20% in 2025. Wanted an aggressive recovery, but initial forecast fell below their ambitions and they had limited incrementality evidence.</div>
+          </div>
+          <div>
+            <div class="section-label">Two discoveries</div>
+            <div class="discovery">
+              <h4>1. Blended reporting hid different businesses</h4>
+              <p><strong>Found:</strong> Combining trade, showroom and online sales obscured the economics paid media could manage.<br><br><strong>Did:</strong> Agreed to separate views in February. By April 16, distinct DTC and B2B reporting instances confirmed.</p>
+              <span class="ps-tag">PS: Revenue forecasting</span>
+            </div>
+            <div class="discovery" style="margin-top:10px">
+              <h4>2. Reduce dependence on one hero product</h4>
+              <p><strong>Found:</strong> Long lead times and stockouts constrained the hero product while alternatives showed traction.<br><br><strong>Did:</strong> Reduced hero-product spend, invested in available alternatives, corrected an out-of-stock landing page. August review confirmed 21% more July orders.</p>
+              <span class="ps-tag">PS: Financial planning and spend allocation</span>
+            </div>
+          </div>
+          <div class="founder-box">
+            <div class="section-label">Why a founder should care</div>
+            <p>Plan around what can ship, not just what sold before. A 2027 plan can give the existing team shared forecasts, inventory-ready priorities and spending guardrails.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EP3 -->
+    <div class="ep-card" onclick="toggle(this)">
+      <div class="ep-header">
+        <div class="ep-num">03</div>
+        <div class="ep-meta">
+          <h3>A $22M Home Textiles Brand</h3>
+          <div class="ep-sub">Revenue grew 26%, modeled CM grew 21% — Q3 '25 vs Q3 '26</div>
+        </div>
+        <div class="ep-toggle">Expand ↓</div>
+      </div>
+      <div class="ep-body">
+        <div class="ep-body-inner">
+          <div>
+            <div class="section-label">Where the business started</div>
+            <div class="section-text">Produced five ads daily, yet struggled with new-customer acquisition and neglected its evergreen catalog. Marketing lead wanted a dependable acquisition base beyond seasonal peaks.</div>
+          </div>
+          <div>
+            <div class="section-label">Two discoveries</div>
+            <div class="discovery">
+              <h4>1. Separate everyday acquisition from launch spikes</h4>
+              <p><strong>Found:</strong> A sprawling catalog and seasonal spikes did not establish a dependable evergreen acquisition base.<br><br><strong>Did:</strong> After the seasonal campaign ended, copied winning ads and increased evergreen investment.</p>
+              <span class="ps-tag">PS: Marketing calendar and channel planning</span>
+            </div>
+            <div class="discovery" style="margin-top:10px">
+              <h4>2. More segmentation was not automatically better</h4>
+              <p><strong>Found:</strong> Non-brand shopping struggled even after narrowing the assortment.<br><br><strong>Did:</strong> Proposed halving campaign count on Sept 1. Sept 8 review confirmed consolidation improved spend, revenue and ROAS.</p>
+              <span class="ps-tag">PS: Channel planning and spend targets</span>
+            </div>
+          </div>
+          <div class="founder-box">
+            <div class="section-label">Why a founder should care</div>
+            <p>A bigger catalog and more ads don&rsquo;t guarantee better margins. A 2027 plan can give the existing team evergreen priorities, a launch calendar and channel tests with margin guardrails.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EP4 -->
+    <div class="ep-card" onclick="toggle(this)">
+      <div class="ep-header">
+        <div class="ep-num">04</div>
+        <div class="ep-meta">
+          <h3>A $20M Apparel Brand</h3>
+          <div class="ep-sub">eCommerce revenue grew 67% ($2.46M → $4.10M) — Q3 '25 vs Q3 '26</div>
+        </div>
+        <div class="ep-toggle">Expand ↓</div>
+      </div>
+      <div class="ep-body">
+        <div class="ep-body-inner">
+          <div>
+            <div class="section-label">Where the business started</div>
+            <div class="section-text">Needed to rebuild new-customer acquisition after missing early-2026 plan. Creator output was abundant, but spending was concentrated in a minority of ads and many assets received too little exposure to evaluate.</div>
+          </div>
+          <div>
+            <div class="section-label">Two discoveries</div>
+            <div class="discovery">
+              <h4>1. Use customer value to choose creative investments</h4>
+              <p><strong>Found:</strong> 61 creator ads took 82% of creator-ad spend; 712 spent under $200.<br><br><strong>Did:</strong> July&rsquo;s ad plan used inventory as a base score and repeat-purchase value as a multiplier. By August, an ads calculator guided creator and style selection.</p>
+              <span class="ps-tag">PS: Creative demand and financial planning</span>
+            </div>
+            <div class="discovery" style="margin-top:10px">
+              <h4>2. Distinguish underexposure from creative failure</h4>
+              <p><strong>Found:</strong> High-conviction creative could receive too little spend to produce useful evidence.<br><br><strong>Did:</strong> Products spending under $100 in seven days were routed into an inventory-checked test. Successful campaigns earned more budget at target efficiency.</p>
+              <span class="ps-tag">PS: Daily spending and efficiency targets</span>
+            </div>
+          </div>
+          <div class="founder-box">
+            <div class="section-label">Why a founder should care</div>
+            <p>A 2027 plan can link the existing team&rsquo;s inventory calendar, creative requirements and testing budgets. Production volume is not enough: the right products need a meaningful test.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EP5 -->
+    <div class="ep-card" onclick="toggle(this)">
+      <div class="ep-header">
+        <div class="ep-num">05</div>
+        <div class="ep-meta">
+          <h3>An 8-Figure Hair-Care Brand</h3>
+          <div class="ep-sub">Revenue grew 66%, modeled CM grew 94% — Aug–Sep '25 vs Aug–Sep '26</div>
+        </div>
+        <div class="ep-toggle">Expand ↓</div>
+      </div>
+      <div class="ep-body">
+        <div class="ep-body-inner">
+          <div>
+            <div class="section-label">Where the business started</div>
+            <div class="section-text">Bootstrapped brand wanted growth without sacrificing profitability. Acquisition costs above $50, limited near-term repeat-purchase lift, and materially different regional delivery costs.</div>
+          </div>
+          <div>
+            <div class="section-label">Two discoveries</div>
+            <div class="discovery">
+              <h4>1. Set acquisition boundaries before spending ambitions</h4>
+              <p><strong>Found:</strong> Committing to spend and hoping acquisition costs worked out conflicted with the brand&rsquo;s customer economics.<br><br><strong>Did:</strong> Replaced a ~$300K monthly run rate with a ~$210K August plan and locked efficiency targets. Campaign migration completed July 31.</p>
+              <span class="ps-tag">PS: Financial forecasts and daily targets</span>
+            </div>
+            <div class="discovery" style="margin-top:10px">
+              <h4>2. The same return target did not mean the same contribution</h4>
+              <p><strong>Found:</strong> Cost of delivery was 58.4% of order revenue internationally vs 45.6% in the US.<br><br><strong>Did:</strong> By Aug 14, acquisition-efficiency targets were split: 1.36x for US, 1.54x internationally, with separate platform targets.</p>
+              <span class="ps-tag">PS: Channel efficiency targets</span>
+            </div>
+          </div>
+          <div class="founder-box">
+            <div class="section-label">Why a founder should care</div>
+            <p>A 2027 plan can give finance and media shared acquisition limits by market, allowing creative testing to earn additional spend.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EP6 -->
+    <div class="ep-card" onclick="toggle(this)">
+      <div class="ep-header">
+        <div class="ep-num">06</div>
+        <div class="ep-meta">
+          <h3>A $7M Footwear Accessories Brand</h3>
+          <div class="ep-sub">Net revenue grew 32%, modeled CM grew 30% — Q3 '25 vs Q3 '26</div>
+        </div>
+        <div class="ep-toggle">Expand ↓</div>
+      </div>
+      <div class="ep-body">
+        <div class="ep-body-inner">
+          <div>
+            <div class="section-label">Where the business started</div>
+            <div class="section-text">Wanted more DTC growth, but the team worried weak reported Meta ROAS meant Facebook was struggling. Creative production was constrained at ~30–40 ads monthly, below the evergreen need discussed in planning.</div>
+          </div>
+          <div>
+            <div class="section-label">Two discoveries</div>
+            <div class="discovery">
+              <h4>1. The platform target was not the business target</h4>
+              <p><strong>Found:</strong> Click-only ROAS and business acquisition efficiency told different stories.<br><br><strong>Did:</strong> Retained an acquisition-efficiency spending guardrail, completed an April Meta geo-holdout, incorporated a ~1.33x total-revenue incrementality factor into Statlas.</p>
+              <span class="ps-tag">PS: Incrementality-informed allocation</span>
+            </div>
+            <div class="discovery" style="margin-top:10px">
+              <h4>2. More media was not the only investment</h4>
+              <p><strong>Found:</strong> Product-in-hand creator assets repeatedly won, but production limited new options.<br><br><strong>Did:</strong> Leadership approved moving media budget into creator production in May. By July 2 the new batch was live.</p>
+              <span class="ps-tag">PS: Creative and financial planning</span>
+            </div>
+          </div>
+          <div class="founder-box">
+            <div class="section-label">Why a founder should care</div>
+            <p>A 2027 plan can specify economic guardrails and production capacity, giving the existing team a measured plan to execute and adjust.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EP7 -->
+    <div class="ep-card" onclick="toggle(this)">
+      <div class="ep-header">
+        <div class="ep-num">07</div>
+        <div class="ep-meta">
+          <h3>A $30M Accessories Brand</h3>
+          <div class="ep-sub">Revenue grew 25%, modeled CM grew 17% — Q3 '25 vs Q3 '26</div>
+        </div>
+        <div class="ep-toggle">Expand ↓</div>
+      </div>
+      <div class="ep-body">
+        <div class="ep-body-inner">
+          <div>
+            <div class="section-label">Where the business started</div>
+            <div class="section-text">Committed to inventory for higher sales while efficiency cuts left the founder worried about growth and cash flow. Challenge: balancing clearance, returning customers, and a specific contribution requirement.</div>
+          </div>
+          <div>
+            <div class="section-label">Two discoveries</div>
+            <div class="discovery">
+              <h4>1. Choose between liquidation and contribution</h4>
+              <p><strong>Found:</strong> Dedicated liquidation campaigns moved aged inventory near break-even, conflicting with September&rsquo;s contribution requirement.<br><br><strong>Did:</strong> On Aug 31, confirmed those campaigns were off and drop assets consolidated into evergreen campaigns.</p>
+              <span class="ps-tag">PS: Financial forecasts and allocation</span>
+            </div>
+            <div class="discovery" style="margin-top:10px">
+              <h4>2. Returning revenue needed an operational check</h4>
+              <p><strong>Found:</strong> A disabled loyalty flow was credited with ~$60K monthly revenue in June and July.<br><br><strong>Did:</strong> After an escalation, the team verified and turned the loyalty flow back on.</p>
+              <span class="ps-tag">PS: Returning-customer planning</span>
+            </div>
+          </div>
+          <div class="founder-box">
+            <div class="section-label">Why a founder should care</div>
+            <p>A 2027 plan can give finance, media and lifecycle owners shared contribution requirements, inventory exceptions and retention checks.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EP8 -->
+    <div class="ep-card ep8" onclick="toggle(this)">
+      <div class="ep-header">
+        <div class="ep-num">08</div>
+        <div class="ep-meta">
+          <h3>Omnichannel: Are You Funding Demand or Capture?</h3>
+          <div class="ep-sub">New Prophit System add-ons — DTC + TikTok Shop + Amazon, cascade measurement</div>
+        </div>
+        <div class="ep-toggle">Expand ↓</div>
+      </div>
+      <div class="ep-body">
+        <div class="ep-body-inner">
+          <div>
+            <div class="section-label">The angle</div>
+            <div class="section-text">More channels can mean less clarity. A customer discovers you in one place and buys in another. Without understanding that spillover, you end up funding the channel that captures the sale while underfunding the one that creates demand.</div>
+          </div>
+          <div>
+            <div class="section-label">Two discoveries</div>
+            <div class="discovery">
+              <h4>1. Where the sale happens is not where demand starts</h4>
+              <p>Explore how unseen spillover between DTC, Amazon and TikTok Shop can change where a brand should invest.</p>
+              <span class="ps-tag">PS: Cascade measurement</span>
+            </div>
+            <div class="discovery" style="margin-top:10px">
+              <h4>2. Measure the whole business, then understand the relationships</h4>
+              <p>Combine actual revenue and costs across channels first. Media incrementality and brand-specific sales-channel cascade analysis are separate layers that inform allocation.</p>
+              <span class="ps-tag">PS: Total-business forecasting</span>
+            </div>
+          </div>
+          <div>
+            <div class="section-label">Prophit System connection</div>
+            <div class="section-text">Luke: extending the existing DTC system across Amazon and TikTok Shop. Channel and total-business forecasts, daily P&amp;L targets in Statlas, brand-specific cascade analysis, and a TikTok Shop audit. Connect those capabilities to clearer 2027 inventory, media and resourcing decisions.</div>
+          </div>
+          <div class="founder-box">
+            <div class="section-label">Why a founder should care</div>
+            <p>More places to sell should create more ways to grow, not more ways to misread the business. Understand what creates demand, where it converts, and where the next dollar should go.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /episodes -->
+
+  <div class="footer">CTC Internal — November 2026 Podcast Recording Briefs</div>
+</div>
+
+<script>
+function toggle(card) {
+  var body = card.querySelector('.ep-body');
+  var tog = card.querySelector('.ep-toggle');
+  var open = body.classList.toggle('open');
+  tog.textContent = open ? 'Collapse ↑' : 'Expand ↓';
+}
+</script>
+</body>
+</html>
